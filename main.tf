@@ -43,7 +43,7 @@ resource "aws_securityhub_insight" "this" {
     }
 
     dynamic "resource_tags" {
-      for_each = try(each.value.filters.resource_tags, {})
+      for_each = try(coalesce(each.value.filters.resource_tags, {}), {})
 
       content {
         comparison = "EQUALS"
